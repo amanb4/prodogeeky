@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Sign up</title>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:300, 400, 500" rel="stylesheet"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+  <link rel="stylesheet" href="css/login.css">
+  <link rel="stylesheet" type="text/css" href="css/nav.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+
+
+
+</head>
+<body>
+
+  <header class="header-glass active">
+    <nav class="navbar navbar-expand-lg navbar-dark">
+         
+        <a class="navbar-brand" href="index.html"><img src="images/Prodyogeeky Logo.png"></a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                  <a class="nav-link" href="#about">About Us</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link">Timeline</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link">Events</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link">Sponsors</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="team.html">Team</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="login.html">Login</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#contact">Contact</a>
+                  </li>
+               
+               
+              </ul>
+  
+            </div>
+        </nav>
+  
+        </header>
+
+<section class="user">
+  <div class="user_options-container">
+    <div class="user_options-text">
+      <div class="user_options-unregistered">
+        <h2 class="user_unregistered-title">Don't have an account?</h2>
+       
+        <button class="user_unregistered-signup" id="signup-button">Sign up</button>
+      </div>
+
+      <div class="user_options-registered">
+        <h2 class="user_registered-title">Have an account?</h2>
+    
+        <button class="user_registered-login" id="login-button">Login</button>
+      </div>
+    </div>
+    
+    <div class="user_options-forms" id="user_options-forms">
+      <div class="user_forms-login">
+        <h2 class="forms_title">Login</h2>
+        <div class="forms_form">
+          <fieldset class="forms_fieldset">
+            <div class="forms_field">
+              <input type="email" placeholder="Email" id="lemail" class="forms_field-input" required autofocus />
+            </div>
+            <div class="forms_field">
+              <input type="password" placeholder="Password" id="lpassword" class="forms_field-input" required />
+            </div>
+          </fieldset>
+          <div class="forms_buttons">
+            <button type="button" class="forms_buttons-forgot">Forgot password?</button>
+            <button type="button" id="login" name="submitData" class="forms_buttons-action">Login</button>
+          </div>
+        </div>
+      </div>
+      <div class="user_forms-signup">
+        <h2 class="forms_title">Sign Up</h2>
+        <div class="forms_form">
+          <fieldset class="forms_fieldset">
+            <div class="forms_field">
+              <input type="text" placeholder="Full Name" id="username" class="forms_field-input" required />
+            </div>
+            <div class="forms_field">
+              <input type="text" placeholder="College Name" id="college" class="forms_field-input" required />
+            </div>
+            <div class="forms_field">
+              <input type="email" placeholder="Email" id="email" class="forms_field-input" required />
+            </div>
+            <div class="forms_field">
+              <input type="password" placeholder="Password" id="password" class="forms_field-input" required />
+            </div>
+          </fieldset>
+          <div class="forms_buttons">
+            
+        <button type="button" id="signup" name="submitData" class="forms_buttons-action">Register</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.1/firebase-app.js";
+  import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.9.1/firebase-auth.js";
+  import { getDatabase, set, ref, update } from "https://www.gstatic.com/firebasejs/9.9.1/firebase-database.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyA84naNcTlt3P58QAHu82SPQYlczOYHGtY",
+  authDomain: "techfest-b481d.firebaseapp.com",
+  projectId: "techfest-b481d",
+  storageBucket: "techfest-b481d.appspot.com",
+  messagingSenderId: "385030975239",
+  appId: "1:385030975239:web:717d63a99d2a027b369fa2"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const database = getDatabase(app);
+  const auth = getAuth();
+
+signup.addEventListener('click',(e) => {
+
+  var email = document.getElementById('email').value;
+  var password = document.getElementById('password').value;
+  var username = document.getElementById('username').value;
+  var college = document.getElementById('college').value;
+
+  createUserWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+     // Signed in 
+      const user = userCredential.user;
+
+      set(ref(database, 'users/' + user.uid),{
+          username: username,
+          email: email,
+          college : college
+        
+      })
+
+      alert('user created!');
+
+      
+      window.open('index.html','_self');
+
+
+      // ...
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+
+      alert(errorMessage);
+    // ..
+    });
+
+});
+
+ login.addEventListener('click',(e)=>{
+   var email = document.getElementById('lemail').value;
+   var password = document.getElementById('lpassword').value;
+
+      signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in 
+        const user = userCredential.user;
+
+        const dt = new Date();
+         update(ref(database, 'users/' + user.uid),{
+          last_login: dt,
+        })
+
+         alert('User loged in!');
+         window.open('index.html','_self');
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+
+        alert(errorMessage);
+  });
+
+ });
+
+const user = auth.currentUser;
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    // User is signed in, see docs for a list of available properties
+    // https://firebase.google.com/docs/reference/js/firebase.User
+    const uid = user.uid;
+    //bla bla bla
+    // ...
+  } else {
+    // User is signed out
+    // ...
+    //bla bla bla
+  }
+});
+
+logout.addEventListener('click',(e)=>{
+
+   signOut(auth).then(() => {
+     // Sign-out successful.
+     alert('user loged out');
+   }).catch((error) => {
+     // An error happened.
+     const errorCode = error.code;
+     const errorMessage = error.message;
+
+        alert(errorMessage);
+   });
+
+});
+
+
+</script>
+
+<script  src="js/login2.js"></script>
+
+</body>
+</html>
